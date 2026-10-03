@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.sammorgandk.fusion-monitor</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/Users/sam/code/fusion-monitor/venv/bin/python3</string>
+        <string>/Users/sam/code/fusion-monitor/fusion_monitor.py</string>
+    </array>
+
+    <!-- The script reads FUSION_SMTP_PASSWORD from .env, but launchd doesn't
+         inherit your shell environment, so we pass the working directory and
+         let python-dotenv pick up the .env file automatically. -->
+    <key>WorkingDirectory</key>
+    <string>/Users/sam/code/fusion-monitor</string>
+
+    <!-- Restart automatically if it crashes -->
+    <key>KeepAlive</key>
+    <true/>
+
+    <!-- Wait 30 s before restarting on crash (avoids tight crash loops) -->
+    <key>ThrottleInterval</key>
+    <integer>30</integer>
+
+    <!-- Start when the plist is loaded (login) -->
+    <key>RunAtLoad</key>
+    <true/>
+
+    <key>StandardOutPath</key>
+    <string>/Users/sam/Library/Logs/fusion-monitor.log</string>
+
+    <key>StandardErrorPath</key>
+    <string>/Users/sam/Library/Logs/fusion-monitor.log</string>
+</dict>
+</plist>
